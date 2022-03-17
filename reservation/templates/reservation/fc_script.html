@@ -1,0 +1,75 @@
+{% load filter %}
+{% load static %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar:{
+                left: 'prev,next today',
+                center: 'title',
+                end: 'timeGridWeek,dayGridMonth eventCreate'
+            },
+            initialView: 'timeGridWeek',
+            slotMinTime: "05:00:00",
+            slotMaxTime: "23:00:00",
+            customButtons: {
+                eventCreate: {
+                  text: '예약',
+                  click: function() {
+                    $("#eventCreateModal").modal("show");
+                    }
+                }
+            },
+            height: 'auto',
+            events: [
+                {% if reservation_list %}
+                {% for reservation in reservation_list %}
+                    {
+                        id: "{{ reservation.id }}",
+                        title: "{{ reservation.booker }}",
+                        start: "{{ reservation.start_time | datetimeForFC }}",
+                        end: "{{ reservation.end_time | datetimeForFC }}",
+                        extendedProps: {
+                            booker: "{{ reservation.booker }}",
+                            participants: "{{ reservation.participants}}",
+                            description: "{{ reservation.description }}"
+                          },
+                    },
+                {% endfor %}
+                {% endif %}
+            ],
+            eventTimeFormat: {
+                hour: 'numeric',
+                minute: '2-digit',
+                meridiem: 'short'
+            },
+            nowIndicator: true,
+            allDaySlot: false,
+            eventDisplay: 'block',
+            displayEventEnd: true,
+            eventClick: function(info) {
+                var start = moment(info.event.start).format("LT");
+                var end = moment(info.event.end).format("LT");
+                var start_edit = moment(info.event.start).format("YYYY[-]MM[-]DD[T]HH:mm:ss");
+                var end_edit = moment(info.event.end).format("YYYY[-]MM[-]DD[T]HH:mm:ss");
+                $("#eventModal").modal("show");
+                $(".modalBodyBooker").text("예약자 : " + info.event.extendedProps.booker);
+                $(".modalBodyParticipants").text("참석자 : " + info.event.extendedProps.participants);
+                $(".modalBodyTime").text("예약시간 : " + start + " ~ " + end)
+                $(".modalBodyDescription").text("용도 : " + info.event.extendedProps.description);
+                $("#editReservationModalBtn").attr("data-id",info.event.id);
+                $("#editReservationModalBtn").attr("data-booker",info.event.extendedProps.booker);
+                $("#editReservationModalBtn").attr("data-participants",info.event.extendedProps.participants);
+                $("#editReservationModalBtn").attr("data-start",start_edit);
+                $("#editReservationModalBtn").attr("data-end",end_edit);
+                $("#editReservationModalBtn").attr("data-description",info.event.extendedProps.description);
+                $("#deleteReservationModalBtn").attr("data-id",info.event.id);
+                }
+        });
+        calendar.render();
+        calendar.setOption('locale','ko');
+    });
+</script>
+<script src={% static 'fullcalendar/lib/main.js' %}></script>
+<script src={% static 'fullcalendar/lib/locales-all.js' %}></script>
