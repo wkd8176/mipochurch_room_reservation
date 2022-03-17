@@ -18,13 +18,16 @@ class ReservationList(ListView):
     now = datetime.now()
     limit_date = now - timedelta(days=30)
 
-    old_reservation = Reservation.objects.filter(end_time__lt=limit_date)
-    old_reservation.delete()
-
     def get_context_data(self, **kwargs):
         context = super(ReservationList, self).get_context_data()
 
         return context
+
+    def get_queryset(self):
+        old_reservation = Reservation.objects.filter(end_time__lt=self.limit_date)
+        if old_reservation:
+            old_reservation.delete()
+        return Reservation.objects.all()
 
 
 def reservation_create(request):
@@ -75,7 +78,7 @@ def reservation_edit(request, pk):
                 return redirect('reservation:main')
         else:
             messages.warning(request, '비밀번호가 맞지 않습니다.')
-            return redirect('reservation:main')            
+            return redirect('reservation:main')
     else:
         form = ReservationForm(instance=reservation)
     context = {'reservation_list': reservation_list, 'form': form}
@@ -97,7 +100,7 @@ def reservation_delete(request, pk):
             return redirect('reservation:main')
         else:
             messages.warning(request, '비밀번호가 맞지 않습니다.')
-            return redirect('reservation:main')    
+            return redirect('reservation:main')
     else:
         messages.warning(request, '비밀번호가 맞지 않습니다.')
         return redirect('reservation:main')
