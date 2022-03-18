@@ -16,7 +16,7 @@ services:
             - web
     certbot:
         image: certbot/certbot:arm64v8-latest
-        enviroment:
+        environment:
             - TZ=Asia/Seoul
         entrypoint: "/bin/sh -C 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
         volumes:
