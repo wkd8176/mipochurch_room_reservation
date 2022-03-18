@@ -15,7 +15,9 @@ services:
         depends_on:
             - web
     certbot:
-        image: certbot/certbot
+        image: certbot/certbot:arm64v8-latest
+        enviroment:
+            - TZ=Asia/Seoul
         entrypoint: "/bin/sh -C 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
         volumes:
             - ./data/certbot/conf:/etc/letsencrypt
