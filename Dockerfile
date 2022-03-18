@@ -8,6 +8,9 @@ WORKDIR /usr/src/app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERD 1
 
+RUN apt-get update -y
+RUN apt-get install -y  build-essential
+
 COPY . /usr/src/app/
 
 # install dependencies 
