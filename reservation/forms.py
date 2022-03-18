@@ -1,5 +1,5 @@
+import re
 from datetime import datetime, timedelta
-from termios import VLNEXT
 
 from django import forms
 from django.core.exceptions import ValidationError
@@ -50,7 +50,7 @@ class ReservationForm(forms.ModelForm):
             if cleaned_start > cleaned_end:
                 raise ValidationError('종료시간이 시작시간보다 과거일 수 없습니다.')
 
-            if now > cleaned_start + timedelta(minutes=1):
+            if now > cleaned_start + timedelta(minutes=10):
                 raise ValidationError('과거에 예약할 수 없습니다.')
 
             cleaned_start_date = cleaned_start.date()
@@ -84,3 +84,22 @@ class ReservationForm(forms.ModelForm):
 
         if cleaned_password is None:
             raise ValidationError('비밀번호를 입력하세요')
+        else:
+            self.passwordValidation(cleaned_password)
+
+    def passwordValidation(self, password):
+
+        if len(password) < 8:
+            raise ValidationError('비밀번호는 최소 8자 이상이어야 합니다.')
+
+        # elif re.search('[0-9]+', password) is None:
+        #     raise ValidationError('비밀번호는 최소 1개 이상의 숫자가 포함되어야 합니다.')
+
+        # elif re.search('[a-zA-Z]+', password) is None:
+        #     raise ValidationError('비밀번호는 최소 1개 영문 대소문자가 포함되어야 합니다.')
+
+        # elif re.search('[`~!@#$%^&*<.>/?]+', password) is None:
+        #     raise ValidationError('비밀번호는 최소 1개 이상의 특수문자가 포함되어야 합니다.')
+
+        else:
+            return True
