@@ -13,9 +13,24 @@
 
     {% block header %}{% endblock header %}
     <style>
-        /* body 스타일 */
+        html,
         body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #wrapper {
+            height: auto;
+            min-height: 100%;
             padding-bottom: 75px;
+        }
+
+        footer {
+            height: 75px;
+            position: relative;
+            transform: translateY(-100%);
+
         }
 
         @media screen and (min-width:386px) and (max-width:800px) {
@@ -24,7 +39,19 @@
             body {
                 font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
                 font-size: 11px;
-                height: 100%;
+            }
+
+            #wrapper {
+                height: auto;
+                min-height: 100%;
+                padding-bottom: 50px;
+            }
+
+            footer {
+                height: 50px;
+                position: relative;
+                transform: translateY(-100%);
+
             }
 
             .fc-toolbar-title {
@@ -50,7 +77,19 @@
             body {
                 font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
                 font-size: 11px;
-                height: 100%;
+            }
+
+            #wrapper {
+                height: auto;
+                min-height: 100%;
+                padding-bottom: 50px;
+            }
+
+            footer {
+                height: 50px;
+                position: relative;
+                transform: translateY(-100%);
+
             }
 
             .fc-toolbar-title {
@@ -75,7 +114,7 @@
 <body>
     {% include 'reservation/navbar.html' %}
 
-    <div class="container-fluid my-3">
+    <div class="container-fluid my-3" id="wrapper">
         <div class="row">
             <div class="col-12" id="main-area">
                 {% block main_area %}{% endblock main_area %}
