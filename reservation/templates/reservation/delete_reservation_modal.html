@@ -1,0 +1,32 @@
+<!--삭제 확인 모달-->
+<div class="modal fade" id="deleteReservationModal" tabindex="-1" role="dialog" aria-labelledby="deleteReservationModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">정말로 삭제하시겠습니까?</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" id="reservation_delete_form">
+                {% csrf_token %}
+                <div class="modal-body pb-0">
+                    <div class="row">
+                        <div class="d-grid gap-2 mb-3">
+                            <span class="modalBodyBooker"></span>
+                            <span class="modalBodyParticipants"></span>
+                            <span class="modalBodyTime"></span>
+                            <span class="modalBodyDescription"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">암호</span>
+                            <input type="password" class="form-control" name="password" id="delete_password">
+                        </div>
+                        <button class="btn btn-danger" type="submit" id="deleteReservationBtn">삭제</button>
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">취소</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<!--예약 모달-->
+<div class="modal fade" id="eventCreateModal" tabindex="-1" aria-labelledby="eventCreateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="eventCreateModalLabel">예약</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'reservation:reservation_create' %}" method="post" id="reservation_form">
+                {% csrf_token %}
+                <div class="modal-body pb-0">
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">예약자</span>
+                            <input type="text" class="form-control" name="booker" id="booker">
+                            <span class="input-group-text">참석자</span>
+                            <input type="text" class="form-control" name="participants" id="participants">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">시작시간</span>
+                            <input type="datetime-local" class="form-control" name="start_time" id="start_time">
+                            <span class="input-group-text">종료시간</span>
+                            <input type="datetime-local" class="form-control" name="end_time" id="end_time">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">용도</span>
+                            <textarea type="text" class="form-control" aria-label="With textarea" name="description" id="description" rows=10></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">암호</span>
+                            <input type="password" class="form-control" placeholder="8자리 이상 입력하세요." name="password" id="password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="reservation_submit" class="btn btn-secondary">예약</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

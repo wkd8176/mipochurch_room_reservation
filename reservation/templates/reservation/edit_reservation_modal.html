@@ -1,0 +1,42 @@
+<!-- 예약 수정 모달-->
+<div class="modal fade" id="editReservationModal" tabindex="-1" role="dialog" aria-labelledby="editReservationModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" editReservationModal id="editReservationModalLabel">예약 수정</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" id="reservation_edit_form">
+                {% csrf_token %}
+                <div class="modal-body pb-0">
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">예약자</span>
+                            <input type="text" class="form-control" name="booker" id="editBooker">
+                            <span class="input-group-text">참석자</span>
+                            <input type="text" class="form-control" name="participants" id="editParticipants">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">시작시간</span>
+                            <input type="datetime-local" class="form-control" name="start_time" id="editStartTime">
+                            <span class="input-group-text">종료시간</span>
+                            <input type="datetime-local" class="form-control" name="end_time" id="editEndTime">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">용도</span>
+                            <textarea type="text" class="form-control" aria-label="With textarea" name="description" id="editDescription" rows=10></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">암호</span>
+                            <input type="password" class="form-control" name="password" id="edit_password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit" id="editReservationBtn">수정</button>
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">취소</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
