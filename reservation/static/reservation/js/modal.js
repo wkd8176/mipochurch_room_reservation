@@ -44,10 +44,28 @@ $('#modal_today_close').click(function () {
 
 var checkCookie = getCookie('mycookie');
 
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function () {
     if (checkCookie == 'popupEnd') {
         $('#noticeModal').modal('hide');
     } else {
         $('#noticeModal').modal('show');
     }
+});
+
+var now = new Date();
+var initialDate = sessionStorage.getItem('initialDate')
+if (initialDate == null){
+    initialDate = moment(now).format("YYYY[-]MM[-]DD");
+    sessionStorage.setItem('initialDate',initialDate);
+} else {
+    console.log(sessionStorage.getItem('initialDate'));
+}
+$('#reservation_submit').click(function () {
+    createDate = moment($('#start_time').val()).format("YYYY[-]MM[-]DD");
+    console.log(createDate)
+    sessionStorage.setItem('initialDate',createDate);
+});
+$('#editReservationBtn').click(function () {
+    editDate = moment($('#editStartTime').val()).format("YYYY[-]MM[-]DD");
+    sessionStorage.setItem('initialDate',editDate);
 });

@@ -10,6 +10,7 @@
                 end: 'timeGridWeek,dayGridMonth eventCreate'
             },
             initialView: 'timeGridWeek',
+            initialDate: initialDate,
             slotMinTime: "05:00:00",
             slotMaxTime: "23:00:00",
             customButtons: {
@@ -69,5 +70,6 @@
         });
         calendar.render();
         calendar.setOption('locale', 'ko');
+        sessionStorage.removeItem('initialDate');
     });
 </script>
