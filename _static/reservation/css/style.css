@@ -1,0 +1,64 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poor Story', cursive;
+}
+
+.wrapper {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 75px;
+}
+
+footer {
+    height: 75px;
+    position: relative;
+    transform: translateY(-100%);
+}
+
+#calendar a {
+    text-decoration: none;
+    color: black;
+}
+
+@media screen and (min-width: 386px) and (max-width: 800px) {
+    html,
+    body {
+        font-family: 'Poor Story', cursive;
+        font-size: 0.7rem;
+    }
+
+    .wrapper {
+        height: auto;
+        min-height: 100%;
+        padding-bottom: 50px;
+    }
+
+    footer {
+        height: 50px;
+        position: relative;
+        transform: translateY(-100%);
+    }
+}
+
+@media screen and (max-width: 385px) {
+    html,
+    body {
+        font-family: 'Poor Story', cursive;
+        font-size: 0.6rem;
+    }
+
+    .wrapper {
+        height: auto;
+        min-height: 100%;
+        padding-bottom: 50px;
+    }
+
+    footer {
+        height: 50px;
+        position: relative;
+        transform: translateY(-100%);
+    }
+}
