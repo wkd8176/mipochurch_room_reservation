@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from passlib.hash import django_pbkdf2_sha256
 
-from .models import Reservation
+from .models import Reservation, Notice
 from .forms import ReservationForm
 
 # Create your views here.
@@ -20,7 +20,7 @@ class ReservationList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ReservationList, self).get_context_data()
-
+        context['notice'] = Notice.objects.all()
         return context
 
     def get_queryset(self):

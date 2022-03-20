@@ -13,3 +13,7 @@ class Reservation(models.Model):
 
     def __str__(self):
         return f'[{self.booker}] :: {self.start_time} ~ {self.end_time}'
+
+
+class Notice(models.Model):
+    content = models.TextField(max_length=1000)
